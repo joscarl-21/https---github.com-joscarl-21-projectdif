@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ubicaciones extends Model
 {
     use HasFactory;
-    protected $table='users_cat_centro';
+    protected $table='ubicaciones';
     protected $fillable = ['centro','active'];
 
 }

@@ -8,14 +8,19 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    @if($errors->any())
+                         @foreach ( $errors as $item)
+                            {{ $item->username }}
+                        @endforeach 
+                    @endif
+                    <form method="POST" action="{{ route('postLogin') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nivel');
+            $table->integer('nivel');
             $table->string('departamento');
-            $table->string('padre');
-            $table->string('direccion');
+            $table->integer('padre');
+            $table->integer('direccion');
 
             $table->timestamps();
         });

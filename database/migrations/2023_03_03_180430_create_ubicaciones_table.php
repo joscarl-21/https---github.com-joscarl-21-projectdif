@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ubicaciones', function (Blueprint $table) {
             $table->id('id');
             $table->string('centro');
+           $table->integer('active');
     
 
             $table->timestamps();

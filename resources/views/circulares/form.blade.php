@@ -22,8 +22,13 @@
  </div>
 
 <div class="form-group">
-  <label for="PDF"> id empleado </label>
- <input class="form-control" type="text" name="empleado_id" id="empleado_id" value="{{ isset($circulares->empleado_id)?$circulares->empleado_id:'' }}">
+  <label for="empleado_id"> id empleado </label>
+  <select class="form-control" name="empleado_id" id="empleado_id"  value="{{ isset($empleado->id)?$empleado->id:'' }}" required>
+    {{-- <option value="">seleccionar</option> --}}
+ @foreach ( $empleados as $empleado ) 
+ <option value="{{$empleado->id}}">{{$empleado->name}}</option>
+ @endforeach 
+ </select>
  </div>
 
 

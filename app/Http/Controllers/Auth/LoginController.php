@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+
 
 class LoginController extends Controller
 {
@@ -36,5 +39,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function username(){
+        return 'username';
+    }
+
+    public function postLogin(Request $request)
+    {
+        //dd($request['password']);
+        $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt(['username' => $request['username'], 'password' => $request['password']])) {
+
+            return redirect()->route('login');
+        }
+
+        return back()->withErrors([
+            'username' => 'LAS CREDENCIALES PROPORCIONADAS NO COINCIDEN CON NUESTROS REGISTROS.',
+        ])->onlyInput('/');
     }
 }

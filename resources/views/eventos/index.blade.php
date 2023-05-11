@@ -25,12 +25,12 @@
         
     
         <tr>
-            <td>{{$evento->empleado_id}}</td>
+            <td>{{$evento->empleado->name}}</td>
             <td>{{$evento->descripcion}}</td>
             <td>{{$evento->fecha}}</td>
             <td>{{$evento->hora_inicio}}</td>
             <td>{{$evento->hora_fin}}</td>
-            <td>{{$evento->ubicacion->nombre}}</td>
+            <td>{{$evento->ubicacion->centro}}</td>
 
             <td>
             <a href="{{url('/eventos/'.$evento->id.'/edit')}}" class="btn btn-success">Editar</a>

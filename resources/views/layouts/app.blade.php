@@ -36,6 +36,7 @@
                             <a class="nav-link" href="{{route('eventos.index')}}">{{__('Eventos')}}</a>
                         </li>
                         <li><a class="nav-link" href="{{route('circulares.index')}}">{{__('Circulares')}}</a></li>
+                        <li><a href="http://servicios.difzapopan.gob.mx/Lab/" class="nav-link" target="blank">Plataforma de Gestion</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

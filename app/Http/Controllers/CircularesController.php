@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Circulares;
 use Illuminate\Http\Request;
+use App\Models\Empleado;
 use Illuminate\Support\Facades\Storage;
 
 class CircularesController extends Controller
@@ -24,7 +25,8 @@ class CircularesController extends Controller
     public function create()
     {
         //
-        return view('circulares.create');
+        $empleados=Empleado::all();
+        return view('circulares.create',compact('empleados'));
     }
 
     /**
@@ -61,8 +63,9 @@ class CircularesController extends Controller
     public function edit($id)
     {
         //
+        $empleados=Empleado::all();
         $circulares=Circulares::findOrFail($id);
-        return view('circulares.edit', compact('circulares'));
+        return view('circulares.edit', compact('circulares','empleados'));
     }
 
     /**
@@ -73,9 +76,10 @@ class CircularesController extends Controller
         //
         $datosCirculares=request()->except(['_token','_method']);
         Circulares::where('id','=',$id)->update($datosCirculares);
-
-        $circulares=Circulares::findOrFail($id);
-        return view('circulares.edit', compact('circulares'));
+        // $circulares=Circulares::findOrFail($id);
+        // return view('circulares.index', compact('circulares'));
+        $datos['circulares']=Circulares::paginate(5);
+        return view('circulares.index',$datos);
     }
 
     /**
