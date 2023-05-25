@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="shortcut icon" href="/img/logo/LOGOTIPO_DIF.png">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -19,9 +19,13 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
+    <div id="app" @guest
+        class="bg-image"
+    @endguest>
+
+        @if (Auth::check())
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
@@ -31,18 +35,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto float-left">
+                        <img src="/img/logo/LOGOTIPO_DIF.png" alt="" width="60" height="40" class="me-5">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('eventos.index')}}">{{__('Eventos')}}</a>
                         </li>
                         <li><a class="nav-link" href="{{route('circulares.index')}}">{{__('Circulares')}}</a></li>
                         <li><a href="http://servicios.difzapopan.gob.mx/Lab/" class="nav-link" target="blank">Plataforma de Gestion</a></li>
+                        <li><a href="http://sise.difzapopan.gob.mx/#/inicio" class="nav-link" target="blank">SISE</a></li>
+                        <li><a href="https://situaciondecalle.difzapopan.gob.mx/#/auth/login" class="nav-link" target="blank">Situación de calle</a></li>
+                        <li><a href="http://ingresos.difzapopan.gob.mx/login" class="nav-link" target="blank">Ingresos</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        
                         @guest
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -77,6 +87,8 @@
                 </div>
             </div>
         </nav>
+        @endif
+        
 
         <main class="py-4">
            

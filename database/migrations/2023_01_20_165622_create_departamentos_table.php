@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('nivel');
             $table->string('departamento');
             $table->integer('padre');
-            $table->integer('direccion');
+            $table->integer('direccion')->nullable();
 
             $table->timestamps();
         });

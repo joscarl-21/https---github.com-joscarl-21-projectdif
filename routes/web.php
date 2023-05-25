@@ -31,20 +31,22 @@ Route::get('/empleado', function () {
 Route::get('/empleado/circulares', [CircularesController::class,'create']);
 */
 
- Route::resource('circulares', CircularesController::class);
+ Route::resource('circulares', CircularesController::class)->middleware('auth');
  Route::resource('empleado', EmpleadoController::class);
- Route::resource('eventos',AgendaEventosController::class);
+ Route::resource('eventos',AgendaEventosController::class)->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register'=>false,'reset'=>false]);
 
 Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
 
 Route::post('/postLogin', [LoginController::class,'postLogin'])->name('postLogin');
+
 Route::get('/setuserspassword', function(){ //funcion para encriptar las contraseñas
     $empleados=Empleado::all();
-  
+    set_time_limit(0);
     foreach ($empleados as $data){
         $data->password= Hash::make($data->username.'Dif');
+        // $data->rol=1;
         $data->update();
     }
     return "etsito";

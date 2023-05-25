@@ -3,10 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        
         <div class="col-md-8">
+            
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
+                <div class="card-header text-center ">
+                <img src="/img/logo/LOGOTIPO_DIF.png" alt="" width="210" height="165">
                 <div class="card-body">
                     @if($errors->any())
                          @foreach ( $errors as $item)

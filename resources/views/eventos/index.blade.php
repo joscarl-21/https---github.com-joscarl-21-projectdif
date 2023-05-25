@@ -3,7 +3,9 @@
 @if(Session::has('mensaje'))
 {{ Session::get('mensaje') }}
 @endif
+@if (Auth::user()->rol=="2")
 <a href="{{url('eventos/create')}}" class="btn btn-success"> Crear un nuevo evento </a>
+@endif 
 <br>
 <br>
 <table class="table table-light">
@@ -16,7 +18,9 @@
             <th>Hora de inicio</th>
             <th>Hora que finaliza</th>
             <th>Ubicacion</th>
+            @if (Auth::user()->rol=="2")
             <th>Acciones</th>
+            @endif 
         </tr>
     </thead>
 
@@ -31,7 +35,7 @@
             <td>{{$evento->hora_inicio}}</td>
             <td>{{$evento->hora_fin}}</td>
             <td>{{$evento->ubicacion->centro}}</td>
-
+            @if (Auth::user()->rol=="2")
             <td>
             <a href="{{url('/eventos/'.$evento->id.'/edit')}}" class="btn btn-success">Editar</a>
              | 
@@ -40,8 +44,8 @@
             {{method_field('DELETE') }}
             <input class="btn btn-danger" type="submit" onclick="return confirm(' ¿Quires borrar? ')" value="Borrar">
             </form>
-
             </td>
+            @endif 
         </tr>
 
     @endforeach
