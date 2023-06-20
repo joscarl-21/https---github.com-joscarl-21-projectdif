@@ -14,7 +14,7 @@
 
     <thead class="thead-light">
         <tr>
-            <th>id del circular</th>
+            <th>Id circular</th>
             <th>Titulo</th>
             <th>Fecha</th>
             <th>Descripcion</th>

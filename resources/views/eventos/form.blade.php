@@ -15,12 +15,71 @@
 
 <div class="form-group">
 <label for="empleado_id">Responsable del evento </label>
-<select class="form-control" name="empleado_id" id="empleado_id" value="{{ isset($empleado->id)?$empleado->id:'' }}" required>
- <option value="">seleccionar</option>
+{{-- <select class="form-control" name="empleado_id" id="empleado_id" value="{{ isset($empleado->id)?$empleado->id:'' }}" required>
+  <option value="op" for="op"></option> 
  @foreach ( $empleados as $empleado ) 
- <option value="{{$empleado->id}}">{{$empleado->name}}</option>
+ <option value="{{$empleado->id}}">{{$empleado->name}} {{$empleado->apaterno}} {{$empleado->amaterno}}</option>
  @endforeach 
- </select>
+ </select> --}}
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+ <form id="searchForm">
+  <style>
+    .ui-autocomplete{
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .ui-menu-item{
+      padding: 5px;
+      cursor: pointer;
+    }
+   </style>
+
+  <input type="text" id="searchInput" name="search" placeholder="Buscar por nombre">
+ 
+   <ul id="list"></ul>
+    {{-- <div id="searchResults"></div> --}}
+ </form>
+
+ <script>
+  $(document).ready(function() {
+    $('#searchInput').on('input', function() {
+      var searchValue = $(this).val();
+      $.ajax({
+        url: '/search',
+        method: 'POST',
+        data: {
+          _token: '{{ csrf_token() }}',
+          search: searchValue
+        },
+        success: function(response) {
+          console.log(response);
+          //$('#searchResults').html(response);
+
+          $('#searchInput').autocomplete({
+            source: response,
+            minLength: 1,
+            select: function(event, ui) {
+              $('#searchInput').val(ui.item.name);
+              return false;
+            }
+          }).autocomplete("instance")._renderItem = function(ul, item) {
+            return $("<li>")
+              .append("<div><strong>" + item.name + "</strong></div>")
+              .appendTo(ul);
+          };
+        }
+      });
+    });
+  });
+</script>
+
+
+{{-- @foreach ($empleados as $empleado)
+<p>{{ $empleado->name }}</p>
+@endforeach --}}
 </div>
 
 <div class="form-group">
@@ -31,15 +90,15 @@
 <div class="form-group">
  <label for="ubicacion_id"> Ubicacion del evento </label>
  <select class="form-control" name="ubicacion_id" id="ubicacion_id"  value="{{ isset($ubicacion->id)?$ubicacion->id:'' }}" required>
-    <option value="">seleccionar</option>
+    {{-- <option value=""></option> --}}
  @foreach ( $ubicaciones as $ubicacion ) 
- <option value="{{$ubicacion->id}}">{{$ubicacion->centro}}</option>
+ <option name="ub" id="ub" value="{{$ubicacion->id}}">{{$ubicacion->centro}}</option>
  @endforeach 
  </select>
 </div>
 
 <div class="form-group">
- <label for="Fecha"> Fecha del evento </label>
+ <label for="Fecha"> Fecha del evento </label>  
  <input class="form-control" type="date" name="fecha" id="fecha" value="{{ isset($eventos->fecha)?$eventos->fecha:old('fecha') }}" required>
   </div>
 

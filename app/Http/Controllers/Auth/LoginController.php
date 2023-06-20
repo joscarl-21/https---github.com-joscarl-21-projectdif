@@ -21,7 +21,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
 
     /**
@@ -59,7 +58,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'LAS CREDENCIALES PROPORCIONADAS NO COINCIDEN CON NUESTROS REGISTROS.',
+            'username' => 'Estas credenciales no coinciden con nuestros registros.',
         ])->onlyInput('/');
     }
 }

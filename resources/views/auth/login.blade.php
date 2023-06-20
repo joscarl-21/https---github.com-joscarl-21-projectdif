@@ -11,20 +11,24 @@
                 <img src="/img/logo/LOGOTIPO_DIF.png" alt="" width="210" height="165">
                 <div class="card-body">
                     @if($errors->any())
-                         @foreach ( $errors as $item)
-                            {{ $item->username }}
+                    <div class="alert alert-danger">
+                        <ul>
+                         @foreach ( $errors->all() as $error)
+                           <li>{{ $error}}</li> 
                         @endforeach 
+                         </ul>
+                    </div>
                     @endif
                     <form method="POST" action="{{ route('postLogin') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
                                 <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus>
 
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

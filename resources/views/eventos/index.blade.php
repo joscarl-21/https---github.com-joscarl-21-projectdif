@@ -12,7 +12,7 @@
 
     <thead class="thead-light">
         <tr>
-            <th>id empleado</th>
+            <th>Empleado encargado</th>
             <th>Descripcion</th>
             <th>Fecha</th>
             <th>Hora de inicio</th>

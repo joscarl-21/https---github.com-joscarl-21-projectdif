@@ -34,10 +34,12 @@ Route::get('/empleado/circulares', [CircularesController::class,'create']);
  Route::resource('circulares', CircularesController::class)->middleware('auth');
  Route::resource('empleado', EmpleadoController::class);
  Route::resource('eventos',AgendaEventosController::class)->middleware('auth');
+ Route::post('/search',[AgendaEventosController::class,'search'])->name('empleados.search');
 
 Auth::routes(['register'=>false,'reset'=>false]);
 
-Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
+// Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
+//Route::get('/home')->name('principal\index');
 
 Route::post('/postLogin', [LoginController::class,'postLogin'])->name('postLogin');
 
@@ -52,6 +54,12 @@ Route::get('/setuserspassword', function(){ //funcion para encriptar las contras
     return "etsito";
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
-});
+//  Route::group(['middleware' => 'auth'], function () {
+//      Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
+//  });
+
+
+Route::get('/home', function(){
+
+    return view('principal.index');
+})->middleware('auth');

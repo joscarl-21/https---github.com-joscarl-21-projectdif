@@ -20,6 +20,7 @@ class AgendaEventosController extends Controller
         return view('eventos.index',$datos);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,6 +40,12 @@ class AgendaEventosController extends Controller
     public function store(Request $request)
     {
         //
+        // public function search(Request $request){
+        //     $searchValue = $request->input('search');
+        //     $results=Empleado::where('name','like','%'.$searchValue.'%')->get();
+        //     return view('eventos.search',['results'=>$results]);
+        //     dd($results);
+        // }
         $campos=[
             'empleado_id'=>'required',
             'descripcion'=>'required|string|max:100',
@@ -55,7 +62,6 @@ class AgendaEventosController extends Controller
 
         // $datosEventos = request()->except('_token');
 
-        Agenda_Eventos::create($request->all());
 
         return redirect('eventos')->with('mensaje','evento creado con exito');
 
@@ -108,4 +114,19 @@ class AgendaEventosController extends Controller
         Agenda_Eventos::destroy($id);
         return redirect('eventos')->with('mensaje','Evento borrado');
     }
+
+  
+
+
+
+    public function search(Request $request)
+    {
+        $searchValue = $request->search;
+        // $results = Empleado::where('name', 'like', '%'.$searchValue.'%')->get();
+        $results = Empleado::whereRaw("name like '%".$searchValue."%'")->get();
+        return response()->json($results);
+    }
+
+
+    
 }

@@ -35,14 +35,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto float-left">
                         <img src="/img/logo/LOGOTIPO_DIF.png" alt="" width="60" height="40" class="me-5">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{route('eventos.index')}}">{{__('Eventos')}}</a>
-                        </li>
-                        <li><a class="nav-link" href="{{route('circulares.index')}}">{{__('Circulares')}}</a></li>
-                        <li><a href="http://servicios.difzapopan.gob.mx/Lab/" class="nav-link" target="blank">Plataforma de Gestion</a></li>
-                        <li><a href="http://sise.difzapopan.gob.mx/#/inicio" class="nav-link" target="blank">SISE</a></li>
-                        <li><a href="https://situaciondecalle.difzapopan.gob.mx/#/auth/login" class="nav-link" target="blank">Situación de calle</a></li>
-                        <li><a href="http://ingresos.difzapopan.gob.mx/login" class="nav-link" target="blank">Ingresos</a></li>
+                        </li> --}}
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{route('principal.Index')}}">{{__('Home')}}</a>
+                        </li> --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
