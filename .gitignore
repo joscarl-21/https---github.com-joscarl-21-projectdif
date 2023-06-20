@@ -8862,3 +8862,5 @@ vendor/spatie/ignition/resources/compiled/ignition.js
 vendor/spatie/ignition/resources/compiled/.gitignore
 vendor/spatie/ignition/resources/compiled/ignition.css
 vendor/spatie/ignition/resources/compiled/ignition.js
+vendor
+node_modules
