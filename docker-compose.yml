@@ -3,14 +3,14 @@ networks:
   intranet_red:
     ipam:
       config:
-        - subnet: 192.168.100.0/24
+        - subnet: 192.168.201.0/24
 
 services:
   db:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: admin1234
+      MYSQL_ROOT_PASSWORD: S1st3m4s
       MYSQL_DATABASE: intranet
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin1234
@@ -20,7 +20,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       intranet_red:
-        ipv4_address: 192.168.100.2
+        ipv4_address: 192.168.201.2
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -34,7 +34,7 @@ services:
       - db
     networks:
       intranet_red:
-        ipv4_address: 192.168.100.3
+        ipv4_address: 192.168.201.3
 
   app:
     build:
@@ -53,6 +53,6 @@ services:
     command: bash -c "chmod -R 777 storage && apt-get update && apache2-foreground && apt-get install nano && npm install -g npm@9.7.1 && npm run build"
     networks:
       intranet_red:
-        ipv4_address: 192.168.100.5
+        ipv4_address: 192.168.201.5
 volumes:
   db_data:

@@ -45,8 +45,20 @@
 
  <script>
   $(document).ready(function() {
+    var typingTimer;
+    var doneTypingInterval = 500; // Tiempo de espera después de dejar de escribir (en milisegundos)
+
+
     $('#searchInput').on('input', function() {
+      clearTimeout(typingTimer); // Borra el temporizador existente
       var searchValue = $(this).val();
+      // Comienza un nuevo temporizador
+      typingTimer = setTimeout(function() {
+        performSearch(searchValue);
+      }, doneTypingInterval);
+    });
+
+    function performSearch(searchValue) {
       $.ajax({
         url: '/search',
         method: 'POST',
@@ -72,7 +84,7 @@
           };
         }
       });
-    });
+    }
   });
 </script>
 

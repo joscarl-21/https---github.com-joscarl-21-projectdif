@@ -123,7 +123,7 @@ class AgendaEventosController extends Controller
     {
         $searchValue = $request->search;
         // $results = Empleado::where('name', 'like', '%'.$searchValue.'%')->get();
-        $results = Empleado::whereRaw("name like '%".$searchValue."%'")->get();
+        $results = Empleado::select('name')->whereRaw("name like '%".$searchValue."%'")->orderBy('name')->get()->take(10);
         return response()->json($results);
     }
 
