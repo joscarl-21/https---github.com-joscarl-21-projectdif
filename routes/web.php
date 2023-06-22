@@ -36,7 +36,7 @@ Route::get('/empleado/circulares', [CircularesController::class,'create']);
  Route::resource('eventos',AgendaEventosController::class)->middleware('auth');
  Route::post('/search',[AgendaEventosController::class,'search'])->name('empleados.search');
 
-Auth::routes(['register'=>false,'reset'=>false]);
+ Auth::routes(['register'=>false,'reset'=>false]);
 
 // Route::get('/home', [AgendaEventosController::class, 'index'])->name('home');
 //Route::get('/home')->name('principal\index');
