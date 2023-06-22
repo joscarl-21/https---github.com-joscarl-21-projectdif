@@ -67,8 +67,22 @@
 
 <script>
   $(document).ready(function() {
+    var typingTimer;
+    var doneTypingInterval = 500; // Tiempo de espera después de dejar de escribir (en milisegundos)
+
     $('#searchInput').on('input', function() {
       var searchValue = $(this).val();
+      clearTimeout(typingTimer); // Borra el temporizador existente
+      // Comienza un nuevo temporizador
+      typingTimer = setTimeout(function() {
+        performSearch(searchValue);
+      }, doneTypingInterval);
+      });
+      var names = [
+     
+      ];
+      function performSearch(searchValue){
+      names = [];
       $.ajax({
         url: '/search',
         method: 'POST',
@@ -78,26 +92,17 @@
         },
         success: function(response) {
           console.log(response);
-
-          var filteredResults = response.filter(function(item) {
-            return item.name !== 'admin';
-          });
-
+          
+          for(const item of response ){
+            names.push(item.name+ ' '+item.apaterno+' '+item.amaterno);
+          }
           $('#searchInput').autocomplete({
-            source: filteredResults,
+            source: names,
             minLength: 1,
-            select: function(event, ui) {
-              $('#searchInput').val(ui.item.name + ' ' + ui.item.apaterno + ' ' + ui.item.amaterno);
-              return false;
-            }
-          }).autocomplete("instance")._renderItem = function(ul, item) {
-            return $("<li>")
-              .append("<div><strong>" + item.name + " " + item.apaterno + " " + item.amaterno + "</strong></div>")
-              .appendTo(ul);
-          };
+          });
         }
       });
-    });
+    }
 
     $('#searchForm').submit(function(event) {
       event.preventDefault();

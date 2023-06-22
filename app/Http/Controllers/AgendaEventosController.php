@@ -122,12 +122,11 @@ class AgendaEventosController extends Controller
     public function search(Request $request)
     {
         $searchValue = $request->search;
-        $results = Empleado::whereRaw("name like '%".$searchValue."%'")
-        ->orWhere('apaterno','like','%'.$searchValue.'%')
-        ->orWhere('amaterno','like','%'.$searchValue.'%')
+        $results = Empleado::whereRaw("concat(name, ' ', apaterno, ' ', amaterno) like '%".$searchValue."%'")
         ->where('name','!=','Admin')//Excluier a usuario admin
-        ->where('name','!=','GEMA DEL ROSARIO')//Excluier a usuario GEMA
-        ->get();
+        ->orderby('name')->orderBy('apaterno')->orderBy('amaterno')
+        ->get()
+        ->take(10);
 
         return response()->json($results);
     }
